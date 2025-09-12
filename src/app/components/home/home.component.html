@@ -1,17 +1,4 @@
-<!-- Search Bar -->
-<!-- <div class="container my-5 p-5 bg-light rounded-4 shadow-sm">
-  <div class="text-center mb-3">
-    <h1 class="fw-bold">Welcome to our movie app</h1>
-    <p class="text-muted lead">Millions of movies, TV shows, and people to discover. Explore now</p>
-  </div>
 
-  <div class="d-flex justify-content-center">
-    <div class="input-group w-50">
-      <input type="text" class="form-control form-control-lg rounded-start-pill" placeholder="Search for movies">
-      <button class="btn btn-warning rounded-end-pill px-4 fw-bold">Search</button>
-    </div>
-  </div>
-</div> -->
 <!-- Search Bar -->
 <div class="container my-5 p-5 bg-light rounded-4 shadow-sm">
   <div class="text-center mb-3">
@@ -97,12 +84,6 @@
           <h6 class="card-title mt-3 fw-bold">{{ movie.title }}</h6>
           <div class="d-flex justify-content-between align-items-center">
             <p class="card-text text-muted small">{{ movie.release_date | date:'MMM dd, yyyy' }}</p>
-            <!-- <i
-              class="fs-5 bi"
-              [ngClass]="movie.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart'"
-              style="cursor: pointer;"
-              (click)="movie.isFavorite = !movie.isFavorite">
-            </i> -->
               <i
               class="fs-5 bi"
               [ngClass]="isFavorite(movie) ? 'bi-heart-fill text-warning' : 'bi-heart'"
