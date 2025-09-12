@@ -1,0 +1,98 @@
+<div *ngIf="isLoading" class="container text-center my-5">
+  <p class="fs-4 text-warning fw-bold">⏳ Loading movie...</p>
+</div>
+
+<div *ngIf="!isLoading && movie" class="container my-5">
+  <div class="row">
+    <div class="col-md-4">
+      <img
+        [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+        class="img-fluid rounded shadow"
+        alt="{{ movie.title }}"
+      />
+    </div>
+
+    <div class="col-md-8 rounded p-4 shadow-sm position-relative">
+      <h2 class="mb-3 fw-bold border-bottom pb-2">{{ movie.title }}</h2>
+
+      <p class="mb-2 fs-4 fw-bold">
+        <strong class="fs-3">Release Date</strong>
+        {{ movie.release_date }}
+      </p>
+
+      <p class="mb-2 fs-5 fw-bold">
+        <strong class="fs-3">Rating </strong>
+        ⭐ {{ movie.vote_average }}/10
+      </p>
+
+      <p class="mb-1 fs-5 fw-bold">
+        <strong class="">Overview</strong>
+      </p>
+      <p class="small fs-5 fw-bold" style="line-height: 1.6">{{ movie.overview }}</p>
+
+      <!-- Genres as Buttons -->
+      <div class="mb-2 fs-5 fw-bold">
+        <div class="mt-2 d-flex flex-wrap gap-2">
+          <button
+            style="background-color: #a7dd14"
+            *ngFor="let genre of movie.genres"
+            class="btn btn-sm px-4 text-dark fw-bold rounded-pill mx-1 my-2"
+            disabled
+          >
+            {{ genre.name }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Row for Duration & Language -->
+      <div class="d-flex flex-wrap gap-4 mb-3">
+        <p class="mb-0">
+          <strong class="">Duration </strong>
+          {{ movie.runtime }} Mins
+        </p>
+
+        <p class="mb-0">
+          <strong class="">Language </strong>
+          {{ movie.original_language | uppercase }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- If movie not found-->
+<div *ngIf="!isLoading && !movie" class="container text-center my-5">
+  <p class="fs-4 text-danger fw-bold">This movie not found</p>
+  <a class="btn btn-warning fw-bold mt-3" routerLink="/">Back to Movies</a>
+</div>
+
+<!-- Recommendations Section -->
+<div class="mt-5 container">
+  <h4 class="fs-3 fw-bold mb-4 border-bottom pb-2">Recommended Movies</h4>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+    <div class="col" *ngFor="let movie of recommendedMovies.slice(0, 4)">
+      <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden position-relative">
+        <img
+          [routerLink]="['/details', movie.id]"
+          class="card-img-top rounded-0"
+          [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+          alt="{{ movie.title }}"
+        />
+
+        <div class="card-body">
+          <p class="mt-3 fs-5">
+            <strong>RATING</strong>
+            ⭐ {{ movie.vote_average }}/10
+          </p>
+          <h6 class="card-title mt-3">{{ movie.title }}</h6>
+          <p class="card-text text-muted">{{ movie.release_date | date : 'MMM dd, yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 mt-4 text-center">
+  <a class="btn btn-warning fw-bold" routerLink="/">Back to Movies</a>
+</div>
