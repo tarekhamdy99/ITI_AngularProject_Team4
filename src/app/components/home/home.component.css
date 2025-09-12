@@ -1,0 +1,53 @@
+/* Pagination Active Style */
+.pagination .page-item.active .page-link {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+}
+
+/* زر أصفر ناعم */
+.btn-warning {
+  background-color: #fdd835;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #ffca28;
+}
+
+/* كروت الأفلام */
+.movie-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.movie-card img {
+  height: 350px;
+  object-fit: cover;
+}
+
+/* Rating Circle */
+.rating-circle {
+  position: absolute;
+  bottom: 80px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.card-body {
+  background: #fff;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  line-height: 1.2rem;
+}
+
+.card-text {
+  margin: 0;
+}
