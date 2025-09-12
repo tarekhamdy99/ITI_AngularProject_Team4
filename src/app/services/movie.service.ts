@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MovieService {
   private apiKey = 'a18352536f548801eff51efc49355dd1';
@@ -13,12 +13,33 @@ export class MovieService {
 
   // Get Now Playing Movies
   getNowPlaying(page: number = 1): Observable<any> {
-    return this.http.get(`${this.baseUrl}/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=${page}`);
+    return this.http.get(
+      `${this.baseUrl}/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=${page}`
+    );
   }
 
   // Search Movies
   searchMovies(query: string, page: number = 1): Observable<any> {
-    return this.http.get(`${this.baseUrl}/search/movie?api_key=${this.apiKey}&language=en-US&query=${encodeURIComponent(query)}&page=${page}`);
+    return this.http.get(
+      `${this.baseUrl}/search/movie?api_key=${
+        this.apiKey
+      }&language=en-US&query=${encodeURIComponent(query)}&page=${page}`
+    );
   }
-   
+
+  getMovieDetails(movieId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/movie/${movieId}?api_key=${this.apiKey}&language=en-US`);
+  }
+
+  getRecommendations(movieId: number | string): Observable<any> {
+    return this.http.get(
+      `${this.baseUrl}/movie/${movieId}/recommendations?api_key=${this.apiKey}&language=en-US`
+    );
+  }
+
+  getPopularMovies(page: number = 1): Observable<any> {
+    return this.http.get(
+      `${this.baseUrl}/movie/popular?api_key=${this.apiKey}&language=en-US&page=${page}`
+    );
+  }
 }

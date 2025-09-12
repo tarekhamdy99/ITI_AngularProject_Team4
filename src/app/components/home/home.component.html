@@ -28,10 +28,7 @@
         [(ngModel)]="searchQuery"
         (keyup.enter)="searchMovies()"
       />
-      <button
-        class="btn btn-warning rounded-end-pill px-4 fw-bold"
-        (click)="searchMovies()"
-      >
+      <button class="btn btn-warning rounded-end-pill px-4 fw-bold" (click)="searchMovies()">
         Search
       </button>
     </div>
@@ -46,18 +43,22 @@
 
   <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
     <div class="col" *ngFor="let movie of movies">
-      <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden position-relative movie-card">
-
+      <div
+        class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden position-relative movie-card"
+      >
         <!-- Movie Poster [routerLink]="['/details', movie.id]" -->
         <img
-          
+          [routerLink]="['/details', movie.id]"
           class="card-img-top"
           [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
           alt="{{ movie.title }}"
         />
 
         <!-- Rating Circle -->
-        <div class="position-absolute m-2" style="width: 50px; height: 50px; bottom: 87px; left: 10px">
+        <div
+          class="position-absolute m-2"
+          style="width: 50px; height: 50px; bottom: 87px; left: 10px"
+        >
           <svg viewBox="0 0 36 36" width="50" height="50">
             <path
               d="M18 2.0845
@@ -69,7 +70,7 @@
             />
             <path
               [attr.stroke]="getStrokeColor(movie.vote_average)"
-              [attr.stroke-dasharray]="(movie.vote_average / 10 * 100) + ', 100'"
+              [attr.stroke-dasharray]="(movie.vote_average / 10) * 100 + ', 100'"
               d="M18 2.0845
                  a 15.9155 15.9155 0 0 1 0 31.831
                  a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -86,7 +87,7 @@
               font-size="8"
               dominant-baseline="middle"
             >
-              {{ movie.vote_average * 10 | number:'1.0-0' }}%
+              {{ movie.vote_average * 10 | number : '1.0-0' }}%
             </text>
           </svg>
         </div>
@@ -95,12 +96,15 @@
         <div class="card-body">
           <h6 class="card-title mt-3 fw-bold">{{ movie.title }}</h6>
           <div class="d-flex justify-content-between align-items-center">
-            <p class="card-text text-muted small">{{ movie.release_date | date:'MMM dd, yyyy' }}</p>
-            <i 
+            <p class="card-text text-muted small">
+              {{ movie.release_date | date : 'MMM dd, yyyy' }}
+            </p>
+            <i
               class="fs-5 bi"
               [ngClass]="movie.isFavorite ? 'bi-heart-fill text-danger' : 'bi-heart'"
-              style="cursor: pointer;"
-              (click)="movie.isFavorite = !movie.isFavorite">
+              style="cursor: pointer"
+              (click)="movie.isFavorite = !movie.isFavorite"
+            >
             </i>
           </div>
         </div>
@@ -109,26 +113,28 @@
   </div>
 </div>
 
-
 <!-- Pagination -->
 <nav class="mt-5">
   <ul class="pagination justify-content-center">
     <!-- Previous -->
     <li class="page-item" [class.disabled]="currentPage === 1">
-      <a class="page-link bg-warning text-dark border-0 mx-1 rounded-2" href="#" (click)="changePage(currentPage - 1)">Previous</a>
+      <a
+        class="page-link bg-warning text-dark border-0 mx-1 rounded-2"
+        href="#"
+        (click)="changePage(currentPage - 1)"
+        >Previous</a
+      >
     </li>
 
     <!-- Dynamic Pages -->
-    <li *ngFor="let p of getPages()" 
-        class="page-item"
-        [class.active]="p === currentPage"
-        [class.disabled]="p === '...'">
-      
+    <li
+      *ngFor="let p of getPages()"
+      class="page-item"
+      [class.active]="p === currentPage"
+      [class.disabled]="p === '...'"
+    >
       <!-- لو رقم -->
-      <a *ngIf="p !== '...'" 
-         class="page-link text-dark" 
-         href="#" 
-         (click)="changePage(p)">
+      <a *ngIf="p !== '...'" class="page-link text-dark" href="#" (click)="changePage(p)">
         {{ p }}
       </a>
 
@@ -140,8 +146,12 @@
 
     <!-- Next -->
     <li class="page-item" [class.disabled]="currentPage === totalPages">
-      <a class="page-link bg-warning text-dark border-0 mx-1 rounded-2" href="#" (click)="changePage(currentPage + 1)">Next</a>
+      <a
+        class="page-link bg-warning text-dark border-0 mx-1 rounded-2"
+        href="#"
+        (click)="changePage(currentPage + 1)"
+        >Next</a
+      >
     </li>
   </ul>
 </nav>
-

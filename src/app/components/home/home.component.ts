@@ -2,18 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { CommonModule, DecimalPipe, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // مهم للـ ngModel
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [
-    CommonModule,
-    DecimalPipe,
-    NgClass,
-    FormsModule
-  ]
+  imports: [CommonModule, DecimalPipe, NgClass, FormsModule, RouterLink],
 })
 export class HomeComponent implements OnInit {
   movies: any[] = [];
@@ -47,7 +43,7 @@ export class HomeComponent implements OnInit {
     this.isSearching = true;
     this.movieService.searchMovies(query, page).subscribe((res: any) => {
       this.setMovies(res);
-      this.searchQuery="";
+      this.searchQuery = '';
     });
   }
 
@@ -58,7 +54,7 @@ export class HomeComponent implements OnInit {
       poster_path: m.poster_path
         ? `https://image.tmdb.org/t/p/w500${m.poster_path}`
         : 'https://placehold.co/500x750',
-      isFavorite: false
+      isFavorite: false,
     }));
     this.totalPages = res.total_pages;
     this.currentPage = res.page;
