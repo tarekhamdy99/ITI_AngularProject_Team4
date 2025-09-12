@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MovieService } from '../../shared/movie-service';
+import { MovieService } from '../../services/movie.service';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../shared/auth-service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
