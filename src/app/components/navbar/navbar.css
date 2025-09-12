@@ -1,0 +1,16 @@
+.style{
+  padding: 10px;
+}
+.counter {
+    position: absolute;
+    top: -5px;
+    right: 70px;
+    color: white;
+    font-size: 15px;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+
+}
