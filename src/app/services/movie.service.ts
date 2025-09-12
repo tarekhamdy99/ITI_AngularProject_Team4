@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthService } from './auth-service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,11 @@ export class MovieService {
   filteredResults: any[] = [];
   favorites: any[] = [];
 
-  constructor(private http: HttpClient) {
-    this.loadFavoritesFromLocalStorage();
+  constructor(private http: HttpClient ,private authService: AuthService) {
+  this.loadFavoritesFromLocalStorage();
+  this.authService.loginState$.subscribe(() => {
+  this.loadFavoritesFromLocalStorage();
+  });
   }
 
   // Get Now Playing Movies
@@ -40,24 +44,37 @@ export class MovieService {
     return this.http.get(
       `${this.baseUrl}/movie/${movieId}/recommendations?api_key=${this.apiKey}&language=en-US`
     );
+  } 
+
+
+saveFavoritesToLocalStorage() {
+  const currentUser = this.authService.getCurrentUser();
+  if (currentUser) {
+    localStorage.setItem(`favorites_${currentUser.username}`, JSON.stringify(this.favorites));
   }
-  saveFavoritesToLocalStorage() {
-    localStorage.setItem('favorites', JSON.stringify(this.favorites));
-  }
+}
   getPopularMovies(page: number = 1): Observable<any> {
     return this.http.get(
       `${this.baseUrl}/movie/popular?api_key=${this.apiKey}&language=en-US&page=${page}`
     );
   }
 
-  // دالة لتحميل قائمة الأفلام من التخزين المحلي
-  loadFavoritesFromLocalStorage() {
-    const favoritesString = localStorage.getItem('favorites');
+
+
+loadFavoritesFromLocalStorage() {
+  const currentUser = this.authService.getCurrentUser();
+  if (currentUser) {
+    const favoritesString = localStorage.getItem(`favorites_${currentUser.username}`);
     if (favoritesString) {
       this.favorites = JSON.parse(favoritesString);
       this._counter.next(this.favorites.length);
+      return;
     }
   }
+  this.favorites = [];
+  this._counter.next(0);
+}
+
 
   increaseCounter() {
     this._counter.next(this._counter.value + 1);
@@ -72,21 +89,29 @@ export class MovieService {
     return this.favorites.some(f => f.id === movie.id);
   }
 
-  // ✅ New method to add or remove a movie from favorites
-  toggleFavorite(movie: any): void {
-    const index = this.favorites.findIndex(f => f.id === movie.id);
 
-    if (index > -1) {
-      // If the movie is already a favorite, remove it
-      this.favorites.splice(index, 1);
-      this.decreaseCounter();
-    } else {
-      // If not a favorite, add it
-      this.favorites.push(movie);
-      this.increaseCounter();
-    }
+toggleFavorite(movie: any): boolean {
+  const currentUser = this.authService.getCurrentUser();
 
-    // Save changes to local storage
-    this.saveFavoritesToLocalStorage();
+  if (!currentUser) {
+    alert('⚠️ لازم تعمل Login الأول علشان تضيف أفلام في ال Wishlist');
+    return false; // فشل العملية
   }
+
+  const index = this.favorites.findIndex(f => f.id === movie.id);
+
+  if (index > -1) {
+    // If the movie is already a favorite, remove it
+    this.favorites.splice(index, 1);
+    this.decreaseCounter();
+  } else {
+    // If not a favorite, add it
+    this.favorites.push(movie);
+    this.increaseCounter();
+  }
+
+  // Save changes to local storage
+  this.saveFavoritesToLocalStorage();
+  return true; // نجاح العملية
 }
+ }

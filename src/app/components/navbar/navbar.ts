@@ -2,23 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
 export class Navbar implements OnInit {
 counter: number = 0;
-   isLoggedIn: boolean = false;
+isLoggedIn: boolean = false;
 
   constructor(private _movieService: MovieService, private _authService: AuthService) {}
 
   ngOnInit(): void {
     this._initializeCounter();
+    this.isLoggedIn = this._authService.isAuthenticated(); 
     this._subscribeToLoginState();
+  }
+
+  logout(): void {
+    this._authService.logout();
   }
 
   private _initializeCounter(): void {
@@ -33,7 +39,5 @@ counter: number = 0;
     });
   }
 
-  logout(): void {
-    this._authService.logout();
-  }
+
 }

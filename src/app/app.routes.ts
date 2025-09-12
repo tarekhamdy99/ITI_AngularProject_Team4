@@ -11,13 +11,11 @@ export const routes: Routes = [
   { path: '', component: HomeComponent }, // الصفحة الرئيسية
   { path: 'home', component: HomeComponent },
   { path: 'details/:id', component: Details },
-  { path: 'wishlist', component: Wishlist, title: 'Wishlist' },
-    { path: 'login', component: Login, title: 'Login' },
+  { path: 'wishlist', component: Wishlist, canActivate: [authGuard], title: 'Wishlist' },
+  { path: 'login', component: Login },
 
-  // Register page
-  { path: 'register', component: Register, title: 'Register' },
+  { path: 'register', component: Register },
 
-  // Account page (protected, requires login)
-  { path: 'account', component: Account, canActivate: [authGuard], title: 'Account' },
+  { path: 'account', component: Account, canActivate: [authGuard] },
 ];
 
