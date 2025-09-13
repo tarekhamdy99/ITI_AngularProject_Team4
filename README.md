@@ -4,8 +4,11 @@ User can browse the movie app and able to see movies and see movie details in ad
 
 # 🚀 Features
 ## 🔑 Authentication & Users
+
 User registration
+
 Login / Logout
+
 Account Details
 
 
