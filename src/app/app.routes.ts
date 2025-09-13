@@ -13,9 +13,7 @@ export const routes: Routes = [
   { path: 'details/:id', component: Details },
   { path: 'wishlist', component: Wishlist, canActivate: [authGuard], title: 'Wishlist' },
   { path: 'login', component: Login },
-
   { path: 'register', component: Register },
-
-  { path: 'account', component: Account, canActivate: [authGuard] },
+  { path: 'account', component: Account, canActivate: [authGuard] }
 ];
 

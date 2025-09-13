@@ -44,7 +44,7 @@ export class MovieService {
     return this.http.get(
       `${this.baseUrl}/movie/${movieId}/recommendations?api_key=${this.apiKey}&language=en-US`
     );
-  } 
+  }
 
 
 saveFavoritesToLocalStorage() {
@@ -97,9 +97,7 @@ toggleFavorite(movie: any): boolean {
     alert('⚠️ لازم تعمل Login الأول علشان تضيف أفلام في ال Wishlist');
     return false; // فشل العملية
   }
-
   const index = this.favorites.findIndex(f => f.id === movie.id);
-
   if (index > -1) {
     // If the movie is already a favorite, remove it
     this.favorites.splice(index, 1);
@@ -114,4 +112,4 @@ toggleFavorite(movie: any): boolean {
   this.saveFavoritesToLocalStorage();
   return true; // نجاح العملية
 }
- }
+  }
