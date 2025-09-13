@@ -1,59 +1,45 @@
-# AngularProjectTeam4
+# 🎬 Movie-Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.0.
+User can browse the movie app and able to see movies and see movie details in addition to add movies to wishlist. (Using Angular Framework)
 
-## Development server
+# 🚀 Features
+## 🔑 Authentication & Users
+User registration
 
-To start a local development server, run:
+Login / Logout
 
-```bash
-ng serve
-```
+Account Details
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Don't have wishlist without login
 
-## Code scaffolding
+## 🏠 Home Page
+List Of many Films
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Using Pagination
 
-```bash
-ng generate component component-name
-```
+Add an remove films from wishlist page
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🔍Search section
+Existing In home Page 
 
-```bash
-ng generate --help
-```
+To search about films by name
 
-## Building
+##  Navbar section
 
-To build the project run:
+Record the number favorite films of user
 
-```bash
-ng build
-```
+Button Login
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Site name and mark
 
-## Running unit tests
+## Details
+Information about film
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Recommendation films
 
-```bash
-ng test
-```
+## ❤️ Wishlist
+Favorite films Of user
 
-## Running end-to-end tests
+Remove films from the list
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
