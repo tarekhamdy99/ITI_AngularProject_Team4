@@ -12,16 +12,16 @@ import { AuthService } from '../../services/auth-service';
   styleUrl: './register.css'
 })
 export class Register {
-  
+
   registerForm: FormGroup;
   errorMessage = '';
-   constructor(private _formBuilder: FormBuilder, private _authService: AuthService, private _router: Router) {
-     this.registerForm = this._formBuilder.group({
-       username: ['', [Validators.required, Validators.minLength(3)]],
-       password: ['', [Validators.required, Validators.minLength(6)]],
-       confirmPassword: ['', [Validators.required]]
-     }, { validators: this.passwordsMatchValidator });
-   }
+  constructor(private _formBuilder: FormBuilder, private _authService: AuthService, private _router: Router) {
+    this.registerForm = this._formBuilder.group({
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]]
+    }, { validators: this.passwordsMatchValidator });
+  }
 
   private passwordsMatchValidator(group: FormGroup) {
     const p = group.get('password')?.value;

@@ -19,7 +19,7 @@ isLoggedIn: boolean = false;
 
   ngOnInit(): void {
     this._initializeCounter();
-    this.isLoggedIn = this._authService.isAuthenticated(); 
+    this.isLoggedIn = this._authService.isAuthenticated();
     this._subscribeToLoginState();
   }
 

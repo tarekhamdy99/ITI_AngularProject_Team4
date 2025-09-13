@@ -1,3 +1,4 @@
+
 <div class="container py-5">
   <div class="card shadow-sm border-0 rounded-4 p-4 mx-auto" style="max-width: 500px;">
     <div class="text-center mb-4">
@@ -14,12 +15,15 @@
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <span class="fw-semibold">Password</span>
           <span>{{ currentUser.password }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span class="fw-semibold">Favorite Movies</span>
+          <span>{{ favoritesCount }}</span>
+        </li>
       </ul>
-
-      <div class="d-grid">
-        <button class="btn btn-danger shadow-sm rounded-pill" (click)="logout()">
-          Logout
-        </button>
+      <div class="d-grid gap-2">
+        <button routerLink="/" class="back btn btn-warning shadow-sm rounded-pill">Back to home</button>
+        <button class="btn btn-danger shadow-sm rounded-pill" (click)="logout()">Logout</button>
       </div>
     } @else {
       <div class="alert alert-warning text-center">

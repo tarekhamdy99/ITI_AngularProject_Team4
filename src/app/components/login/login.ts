@@ -31,7 +31,7 @@ export class Login {
     const { username, password } = this.loginForm.value;
     if (this._authService.login(username, password)) {
       this._authService.loginState$.subscribe();
-      this._router.navigate(['/home']);
+      this._router.navigate(['/']);
     } else {
       this.errorMessage = 'Invalid username or password.';
     }

@@ -1,4 +1,3 @@
-
 <!-- Search Bar -->
 <div class="container my-5 p-5 bg-light rounded-4 shadow-sm">
   <div class="text-center mb-3">
@@ -30,53 +29,51 @@
 
   <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
     <div class="col" *ngFor="let movie of movies">
-      <div
-        class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden position-relative movie-card"
-      >
-        <!-- Movie Poster [routerLink]="['/details', movie.id]" -->
-        <img
-          [routerLink]="['/details', movie.id]"
-          class="card-img-top"
-          [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-          alt="{{ movie.title }}"
-        />
+      <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden position-relative movie-card">
 
-        <!-- Rating Circle -->
-        <div
-          class="position-absolute m-2"
-          style="width: 50px; height: 50px; bottom: 87px; left: 10px"
-        >
-          <svg viewBox="0 0 36 36" width="50" height="50">
-            <path
-              d="M18 2.0845
-                a 15.9155 15.9155 0 0 1 0 31.831
-                a 15.9155 15.9155 0 0 1 0 -31.831"
-              stroke="#e6e6e6"
-              stroke-width="4"
-              fill="none"
-            />
-            <path
-              [attr.stroke]="getStrokeColor(movie.vote_average)"
-              [attr.stroke-dasharray]="(movie.vote_average / 10) * 100 + ', 100'"
-              d="M18 2.0845
-                a 15.9155 15.9155 0 0 1 0 31.831
-                a 15.9155 15.9155 0 0 1 0 -31.831"
-              stroke-width="4"
-              fill="none"
-              stroke-linecap="round"
-            />
-            <circle cx="18" cy="18" r="15" fill="#14532d" />
-            <text
-              x="18"
-              y="20.5"
-              text-anchor="middle"
-              fill="#fff"
-              font-size="8"
-              dominant-baseline="middle"
-            >
-              {{ movie.vote_average * 10 | number : '1.0-0' }}%
-            </text>
-          </svg>
+        <!-- Movie Poster -->
+        <div class="position-relative">
+          <img
+            [routerLink]="['/details', movie.id]"
+            class="card-img-top"
+            [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path : './not_foundimage.png '"
+            alt="{{ movie.title }}"
+          />
+
+          <!-- Rating Circle -->
+          <div class="rating-circle">
+            <svg viewBox="0 0 36 36" width="50" height="50">
+              <path
+                d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"
+                stroke="#e6e6e6"
+                stroke-width="4"
+                fill="none"
+              />
+              <path
+                [attr.stroke]="getStrokeColor(movie.vote_average)"
+                [attr.stroke-dasharray]="(movie.vote_average / 10) * 100 + ', 100'"
+                d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"
+                stroke-width="4"
+                fill="none"
+                stroke-linecap="round"
+              />
+              <circle cx="18" cy="18" r="15" fill="#14532d" />
+              <text
+                x="18"
+                y="20.5"
+                text-anchor="middle"
+                fill="#fff"
+                font-size="8"
+                dominant-baseline="middle"
+              >
+                {{ movie.vote_average * 10 | number : '1.0-0' }}%
+              </text>
+            </svg>
+          </div>
         </div>
 
         <!-- Card Body -->
@@ -84,7 +81,7 @@
           <h6 class="card-title mt-3 fw-bold">{{ movie.title }}</h6>
           <div class="d-flex justify-content-between align-items-center">
             <p class="card-text text-muted small">{{ movie.release_date | date:'MMM dd, yyyy' }}</p>
-              <i
+            <i
               class="fs-5 bi"
               [ngClass]="isFavorite(movie) ? 'bi-heart-fill text-warning' : 'bi-heart'"
               style="cursor: pointer;"
@@ -93,6 +90,91 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Toast Notifications -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1200">
+
+  <!-- Error Toast -->
+  <div
+    class="toast align-items-center text-bg-danger border-0"
+    [class.show]="errorMessage"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ errorMessage }} <br />
+        <small>Redirecting to Home...</small>
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="errorMessage = ''"
+      ></button>
+    </div>
+  </div>
+
+  <!-- Success Toast -->
+  <div
+    class="toast align-items-center text-bg-success border-0"
+    [class.show]="successMessage"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ successMessage }}
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="successMessage = ''"
+      ></button>
+    </div>
+  </div>
+
+  <!-- Info Toast -->
+  <div
+    class="toast align-items-center text-bg-info border-0"
+    [class.show]="infoMessage"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ infoMessage }}
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="infoMessage = ''"
+      ></button>
+    </div>
+  </div>
+
+  <!--  Warning Toast  -->
+  <div
+    class="toast align-items-center text-bg-warning border-0"
+    [class.show]="warningMessage"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ warningMessage }}
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="warningMessage = ''"
+      ></button>
     </div>
   </div>
 </div>
@@ -118,9 +200,9 @@
 
       <!-- لو رقم -->
       <a *ngIf="p !== '...'"
-         class="page-link text-dark"
-         href="#"
-         (click)="changePage(p)">
+          class="page-link text-dark"
+          href="#"
+          (click)="changePage(p)">
         {{ p }}
       </a>
 

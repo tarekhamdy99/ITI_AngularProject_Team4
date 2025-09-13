@@ -62,7 +62,7 @@
           <!-- Heart Icon -->
           <div class="d-flex justify-content-end align-items-center pt-2 border-top">
             <i
-              class="fs-5 bi"
+              class="fs-1 bi"
               [ngClass]="isFavorite(movie) ? 'bi-heart-fill text-warning' : 'bi-heart'"
               style="cursor: pointer;"
               (click)="toggleFavorite(movie)">
@@ -77,7 +77,22 @@
     <div class="d-flex flex-column align-items-center justify-content-center" style="height: 70vh;">
       <img src="mi.ico" alt="No Movies" style="width: 100px; opacity: 0.5;" />
       <p class="text-muted mt-3">No Movies in watch list</p>
-      <button routerLink="/home" class="btn btn-warning mt-2" routerLink="/home">Back to home</button>
+      <button routerLink="/" class="back btn btn-warning mt-2" >Back to home</button>
     </div>
   </ng-template>
+
+<div *ngIf="toastMessage"
+     class="toast align-items-center text-white {{toastColor}} border-0 show position-fixed top-0 end-0 m-3"
+     role="alert" aria-live="assertive" aria-atomic="true"
+     style="z-index: 1055;">
+  <div class="d-flex">
+    <div class="toast-body">
+      {{ toastMessage }}
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+            (click)="toastMessage = null"></button>
+  </div>
+</div>
+
+
 </div>

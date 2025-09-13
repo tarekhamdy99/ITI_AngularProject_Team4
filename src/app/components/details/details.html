@@ -55,6 +55,15 @@
           <strong class="">Language </strong>
           {{ movie.original_language | uppercase }}
         </p>
+
+      </div>
+      <div class="d-flex justify-content-end align-items-center pt-2 border-top">
+            <i
+              class="fs-1 bi"
+              [ngClass]="isFavorite(movie) ? 'bi-heart-fill text-warning' : 'bi-heart'"
+              style="cursor: pointer;"
+              (click)="toggleFavorite(movie)">
+            </i>
       </div>
     </div>
   </div>
@@ -84,8 +93,17 @@
             <strong>Rating</strong>
             ⭐ {{ movie.vote_average }}/10
           </p>
-          <h6 class="card-title mt-3">{{ movie.title }}</h6>
+          <h6 class="card-title mt-3">{{ movie.title|slice:0:20 }}...</h6>
           <p class="card-text text-muted">{{ movie.release_date | date : 'MMM dd, yyyy' }}</p>
+                    <!-- Heart Icon -->
+          <div class="d-flex justify-content-end align-items-center pt-2 border-top">
+            <i
+              class="fs-3 bi"
+              [ngClass]="isFavorite(movie) ? 'bi-heart-fill text-warning' : 'bi-heart'"
+              style="cursor: pointer;"
+              (click)="toggleFavorite(movie)">
+            </i>
+          </div>
         </div>
       </div>
     </div>
@@ -93,5 +111,49 @@
 </div>
 
 <div class="col-12 mt-4 text-center">
-  <a class="btn btn-warning fw-bold mb-3" routerLink="/">Back to Movies</a>
+  <a class="back btn btn-warning fw-bold mb-3" routerLink="/">Back to Movies</a>
+</div>
+<!-- ✅ Toasts -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1200">
+  <!-- Success Toast -->
+  <div
+    class="toast align-items-center text-bg-success border-0"
+    [class.show]="successMessage"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">{{ successMessage }}</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="successMessage = ''"></button>
+    </div>
+  </div>
+
+  <!-- Info Toast -->
+  <div
+    class="toast align-items-center text-bg-info border-0"
+    [class.show]="infoMessage"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">{{ infoMessage }}</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="infoMessage = ''"></button>
+    </div>
+  </div>
+
+  <!-- Warning Toast -->
+  <div
+    class="toast align-items-center text-bg-warning border-0"
+    [class.show]="warningMessage"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">{{ warningMessage }}</div>
+      <button type="button" class="btn-close me-2 m-auto" (click)="warningMessage = ''"></button>
+    </div>
+  </div>
 </div>

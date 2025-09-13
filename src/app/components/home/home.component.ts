@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { CommonModule, DecimalPipe, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +18,13 @@ export class HomeComponent implements OnInit {
   searchQuery: string = '';
   isSearching: boolean = false;
 
-  constructor(private movieService: MovieService) {}
+  // ✅ Toast messages
+  errorMessage: string = '';
+  successMessage: string = '';
+  infoMessage: string = '';
+  warningMessage: string = '';
+
+  constructor(private movieService: MovieService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadMovies();
@@ -39,27 +45,43 @@ export class HomeComponent implements OnInit {
       this.loadMovies();
       return;
     }
-
     this.isSearching = true;
     this.movieService.searchMovies(query, page).subscribe((res: any) => {
       this.setMovies(res);
-      this.searchQuery = "";
+      if (!res.results || res.results.length === 0) {
+        this.errorMessage = `Film "${this.searchQuery}" Not Found`;
+        setTimeout(() => {
+          this.errorMessage = '';
+          this.router.navigate(['/']);
+          this.loadMovies();
+        }, 3000);
+      }
     });
   }
 
-  // Helper to map movies
+  // Helper
   private setMovies(res: any) {
-    this.movies = res.results.map((m: any) => ({
-      ...m,
-      // لا حاجة لـ isFavorite هنا، سيتم إدارتها بواسطة الخدمة
-    }));
+    this.movies = res.results.map((m: any) => ({ ...m }));
     this.totalPages = res.total_pages;
     this.currentPage = res.page;
   }
 
-  // ✅ New Methods:
+  // ✅ Toggle favorite with Toasts
   toggleFavorite(movie: any) {
-    this.movieService.toggleFavorite(movie);
+    const success = this.movieService.toggleFavorite(movie);
+
+    if (!success) {
+      this.warningMessage = '⚠️ You must login first';
+      setTimeout(() => (this.warningMessage = ''), 5000);
+      return;
+    }
+    if (this.isFavorite(movie)) {
+      this.successMessage = `"${movie.title}" added to Wishlist ✅`;
+      setTimeout(() => (this.successMessage = ''), 5000);
+    } else {
+      this.infoMessage = `"${movie.title}" removed from Wishlist ❌`;
+      setTimeout(() => (this.infoMessage = ''), 5000);
+    }
   }
 
   isFavorite(movie: any): boolean {
@@ -71,11 +93,12 @@ export class HomeComponent implements OnInit {
     if (page < 1 || page > this.totalPages) return;
 
     if (this.isSearching) {
-      this.searchMovies(page);
+      this.movieService.searchMovies(this.searchQuery, page).subscribe((res: any) => {
+        this.setMovies(res);
+      });
     } else {
       this.loadMovies(page);
     }
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 

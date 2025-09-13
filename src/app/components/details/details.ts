@@ -14,7 +14,20 @@ export class Details implements OnInit {
   movieId: string = '';
   recommendedMovies: any[] = [];
   isLoading: boolean = true;
-  constructor(private _movieService: MovieService, private _route: ActivatedRoute) {}
+  favorites: any[] = [];
+
+  // ✅ Toast messages
+  successMessage: string = '';
+  infoMessage: string = '';
+  warningMessage: string = '';
+
+  constructor(
+    private _movieService: MovieService,
+    private _route: ActivatedRoute,
+    private _movie: MovieService
+  ) {
+    this.favorites = this._movie.favorites;
+  }
 
   ngOnInit(): void {
     this._route.params.subscribe((params) => {
@@ -67,5 +80,25 @@ export class Details implements OnInit {
         this.recommendedMovies = [];
       },
     });
+  }
+
+  isFavorite(movie: any): boolean {
+    return this._movie.isFavorite(movie);
+  }
+
+  toggleFavorite(movie: any): void {
+    const result = this._movie.toggleFavorite(movie);
+    if (!result) {
+      this.warningMessage = '⚠️ You need to login first!';
+      setTimeout(() => (this.warningMessage = ''), 3000);
+      return;
+    }
+    if (this.isFavorite(movie)) {
+      this.successMessage = `${movie.title} added to favorites ❤️`;
+      setTimeout(() => (this.successMessage = ''), 3000);
+    } else {
+      this.infoMessage = `${movie.title} removed from favorites 💔`;
+      setTimeout(() => (this.infoMessage = ''), 3000);
+    }
   }
 }

@@ -1,0 +1,40 @@
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-color: #f8f9fa;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.content {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content h1 {
+  font-size: 8rem;
+  margin: 0;
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.content h2 {
+  font-size: 2.5rem;
+  margin-top: 0;
+  color: #555;
+}
+
+.content p {
+  font-size: 1.2rem;
+  color: #777;
+}
+
+
+.back:hover {
+  background-color: rgb(222, 83, 83);
+}

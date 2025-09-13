@@ -1,0 +1,11 @@
+
+.back:hover {
+  background-color: rgb(222, 83, 83);
+}
+.toast {
+  min-width: 250px;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+}
+
+

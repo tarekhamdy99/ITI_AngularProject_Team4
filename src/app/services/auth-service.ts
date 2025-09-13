@@ -16,11 +16,12 @@ export class AuthService {
   private loginState = new BehaviorSubject<boolean>(this.isAuthenticated());
   loginState$ = this.loginState.asObservable();
 
+
   isAuthenticated(): boolean {
     return !!localStorage.getItem(this.storageKey);
   }
 
-  
+
   login(username: string, password: string): boolean {
     try {
       const users: User[] = this._getUsers();
@@ -28,7 +29,7 @@ export class AuthService {
 
       if (userExists) {
         this._setLocalStorage(this.storageKey, userExists);
-        this.loginState.next(true); 
+        this.loginState.next(true);
         return true;
       }
       return false;
@@ -59,7 +60,7 @@ export class AuthService {
   logout(): void {
     try {
       localStorage.removeItem(this.storageKey);
-      this.loginState.next(false); 
+      this.loginState.next(false);
     } catch (error) {
       console.error('Error during logout:', error);
     }

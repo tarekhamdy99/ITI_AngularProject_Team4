@@ -4,10 +4,10 @@ import { Navbar } from "./components/navbar/navbar";
 
 @Component({
   selector: 'app-root',
-  standalone: true,  // مهم جداً علشان imports يشتغل
+  standalone: true, 
   imports: [RouterOutlet, Navbar],
   templateUrl: './app.html',
-  styleUrls: ['./app.css']   // لازم تكون بصيغة جمع
+  styleUrls: ['./app.css']
 })
 export class App {
   protected readonly title = signal('AngularProjectTeam4');
