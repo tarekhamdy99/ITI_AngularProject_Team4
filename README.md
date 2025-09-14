@@ -25,7 +25,7 @@ Existing In home Page
 
 To search about films by name
 
-##  Navbar section
+## ☰ Navbar section
 
 Record the number favorite films of user
 
@@ -35,7 +35,7 @@ Button account In condition login
 
 Site name and mark
 
-## Details
+## 📜 Details
 Information about film
 
 Recommendation films
@@ -47,5 +47,7 @@ Favorite films Of user
 
 Remove films from the list
 
+## 🚫 Not Found Page
+Is showed In Invalid path Condition
 
 
