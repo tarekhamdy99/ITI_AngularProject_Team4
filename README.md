@@ -43,7 +43,7 @@ Recommendation films
 Add an remove films from wishlist page
 
 ## ❤️ Wishlist
-Favorite films Of user
+Favorite films list Of user
 
 Remove films from the list
 
