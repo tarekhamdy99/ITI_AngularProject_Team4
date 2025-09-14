@@ -45,7 +45,7 @@ export class Register {
     setTimeout(() => {
       this.toastMessage = '';
       this._router.navigate(['/']);
-    }, 2000);
+    },500);
   } else {
     this.errorMessage = 'Username already exists.';
   }
