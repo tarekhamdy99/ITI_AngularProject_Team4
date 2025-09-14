@@ -23,7 +23,7 @@
       </ul>
       <div class="d-grid gap-2">
         <button routerLink="/" class="back btn btn-warning shadow-sm rounded-pill">Back to home</button>
-        <button class="btn btn-danger shadow-sm rounded-pill" (click)="logout()">Logout</button>
+        <button routerLink="/login" class="btn btn-danger shadow-sm rounded-pill" (click)="logout()">Logout</button>
       </div>
     } @else {
       <div class="alert alert-warning text-center">
