@@ -27,6 +27,8 @@ To search about films by name
 
 ## ☰ Navbar section
 
+Activation The Dark Mode .
+
 Record the number favorite films of user
 
 Button Login
