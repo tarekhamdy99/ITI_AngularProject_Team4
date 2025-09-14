@@ -1,3 +1,23 @@
+<!-- ✅ Toast Container -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+  <div
+    *ngIf="toastMessage"
+    class="toast align-items-center text-white bg-success border-0 show"
+    role="alert"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ toastMessage }}
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="toastMessage = ''"
+      ></button>
+    </div>
+  </div>
+</div>
+
 <div class="container d-flex justify-content-center align-items-center vh-100">
   <div class="card shadow-sm border-0 rounded-4 p-4" style="max-width: 400px; width: 100%;">
     <div class="text-center mb-4">
@@ -8,12 +28,10 @@
     <form [formGroup]="registerForm" (ngSubmit)="register()">
 
       <!-- Username -->
-
       <div class="mb-3">
         <label for="username" class="form-label fw-semibold">Username</label>
         <input id="username" type="text" class="form-control shadow-sm"
               formControlName="username" placeholder="Enter your username" />
-
         @if (username?.touched && username?.invalid) {
           <div class="text-danger small mt-1">
             @if (username?.errors?.['required']) {
@@ -27,12 +45,10 @@
       </div>
 
       <!-- Password -->
-
       <div class="mb-3">
         <label for="password" class="form-label fw-semibold">Password</label>
         <input id="password" type="password" class="form-control shadow-sm"
               formControlName="password" placeholder="Enter your password" />
-
         @if (password?.touched && password?.invalid) {
           <div class="text-danger small mt-1">
             @if (password?.errors?.['required']) {
@@ -46,12 +62,10 @@
       </div>
 
       <!-- Confirm Password -->
-
       <div class="mb-3">
         <label for="confirmPassword" class="form-label fw-semibold">Confirm Password</label>
         <input id="confirmPassword" type="password" class="form-control shadow-sm"
               formControlName="confirmPassword" placeholder="Confirm your password" />
-
         @if (registerForm.errors?.['passwordsMismatch'] && confirmPassword?.touched) {
           <div class="text-danger small mt-1">
             Passwords do not match.
@@ -60,13 +74,11 @@
       </div>
 
       <!-- Error Message -->
-
       @if (errorMessage) {
         <div class="alert alert-danger text-center" role="alert">{{ errorMessage }}</div>
       }
 
       <!-- Submit -->
-
       <div class="d-grid mb-3">
         <button type="submit" [disabled]="registerForm.invalid" class="btn btn-secondary px-4 py-2 shadow-sm rounded-pill">
           Register
@@ -74,7 +86,6 @@
       </div>
 
       <!-- Navigate to Login -->
-
       <div class="text-center">
         <p class="text-muted">Already have an account?</p>
         <button type="button" class="btn btn-outline-dark px-4 py-2 shadow-sm rounded-pill" (click)="navigateToLogin()">

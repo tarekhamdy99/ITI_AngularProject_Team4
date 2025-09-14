@@ -14,3 +14,14 @@
     text-align: center;
 
 }
+.btn-toggle-dark i,
+.btn-toggle-dark span {
+  color: white !important;
+}
+body.dark-mode .btn-toggle-dark i,
+body.dark-mode .btn-toggle-dark span {
+  color: inherit !important;
+}
+.mode:hover{
+  background-color: #444 !important;
+}

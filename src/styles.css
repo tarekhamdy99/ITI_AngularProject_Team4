@@ -1,3 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
 
- 
+body {
+  background-color: #ffffff;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+
+body.dark-mode {
+  background-color: rgb(27, 27, 41);
+  color: #f1f1f1;
+}
+
+body.dark-mode .navbar {
+  background-color: rgb(43, 43, 63) !important;
+}
+
+body.dark-mode .navbar a,
+body.dark-mode .navbar .navbar-brand,
+body.dark-mode .navbar .btn {
+  color: #ffffff !important;
+}
+
+body.dark-mode .card a,
+body.dark-mode .card i {
+  color: yellow !important;
+}
+
+
+body.dark-mode .card {
+  background-color: white;
+  color: #f1f1f1;
+  border: 1px solid #444;
+}
+
+
+body.dark-mode .card-title {
+  color: black !important;
+  font-weight: 600;
+}
+
+
+body.dark-mode .card-text {
+  color: black !important;
+}
+body.dark-mode .card-rate {
+  color: black !important;
+}
+body.dark-mode .Search-text {
+  color: black !important;
+}
+
+body.dark-mode .card .btn {
+  background-color: #333 !important;
+  color: white!important;
+  border: 1px solid #555;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-mode  .btn:hover {
+  background-color: brown!important;
+
+}
+

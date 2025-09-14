@@ -2,3 +2,10 @@
 .back:hover {
   background-color: rgb(222, 83, 83);
 }
+
+.bi-heart,
+.bi-heart-fill {
+  transition: color 0.3s ease;
+  cursor: pointer;
+  color: #ffc107 !important;
+}

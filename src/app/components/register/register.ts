@@ -14,7 +14,8 @@ import { AuthService } from '../../services/auth-service';
 export class Register {
 
   registerForm: FormGroup;
-  errorMessage = '';
+  errorMessage: string = '';
+  toastMessage: string = '';
   constructor(private _formBuilder: FormBuilder, private _authService: AuthService, private _router: Router) {
     this.registerForm = this._formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
@@ -28,21 +29,28 @@ export class Register {
     const c = group.get('confirmPassword')?.value;
     return p === c ? null : { passwordsMismatch: true };
   }
-
   register(): void {
-    this.errorMessage = '';
+  this.errorMessage = '';
 
-    if (this.registerForm.invalid) {
-      this.errorMessage = 'Please fix the errors in the form.';
-      return;
-    }
-    const { username, password } = this.registerForm.value;
-    if (this._authService.register(username, password)) {
-      this._router.navigate(['/login']);
-    } else {
-      this.errorMessage = 'Username already exists.';
-    }
+  if (this.registerForm.invalid) {
+    this.errorMessage = 'Please fix the errors in the form.';
+    return;
   }
+
+  const { username, password } = this.registerForm.value;
+
+  if (this._authService.register(username, password)) {
+    this._authService.login(username, password);
+    this.toastMessage = 'Registration successful! 🎉, Redirect to Your Home page';
+    setTimeout(() => {
+      this.toastMessage = '';
+      this._router.navigate(['/']);
+    }, 2000);
+  } else {
+    this.errorMessage = 'Username already exists.';
+  }
+}
+
 
   // getters for template convenience
   get username() { return this.registerForm.get('username'); }

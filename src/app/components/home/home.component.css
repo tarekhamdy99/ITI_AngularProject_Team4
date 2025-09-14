@@ -39,3 +39,9 @@
 .card-text {
   margin: 0;
 }
+.movie-card .bi-heart,
+.movie-card .bi-heart-fill {
+  transition: color 0.3s ease;
+  cursor: pointer;
+  color: #ffc107 !important;
+}

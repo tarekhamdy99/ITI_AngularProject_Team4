@@ -1,35 +1,41 @@
-<div style="background-color: #FFE353;">
-  <nav class="container navbar navbar-expand-lg px-4">
+
+<nav class="navbar navbar-expand-lg bg-warning px-4 w-100">
+  <div class="container">
     <div class="navbar-brand fw-bold">
-        <a routerLink="/" style="text-decoration: none; color: black;">
-          <i class="bi bi-film me-2"></i>
-          Movie App
-        </a>
+      <a routerLink="/" style="text-decoration: none; color: inherit;">
+        <i class="bi bi-film me-2"></i>
+        Movie App
+      </a>
     </div>
 
-    <div class="ms-auto d-flex align-items-center">
-      <div class="navbar-brand position-relative">
-          <a routerLink="/wishlist" style="text-decoration: none; color: black;">
-              <i class="bi bi-heart-fill me-2 fs-5"></i>
-              <span class="counter" *ngIf="counter != 0">{{ counter }}</span>
-              Wishlist
-          </a>
-      </div>
+    <div class="ms-auto d-flex align-items-center gap-3">
 
-      <div class="navbar-brand" *ngIf="!isLoggedIn">
-        <a routerLink="/login" class="btn btn-dark px-4 py-2 rounded-pill">Login</a>
-      </div>
-      <div class="navbar-brand" *ngIf="isLoggedIn">
-          <button class="btn btn-danger px-4 py-2 rounded-pill" (click)="logout()">Logout</button>
-      </div>
-      <div class="navbar-brand" *ngIf="isLoggedIn">
-              <a routerLink="/account" class="btn btn-outline-dark px-4 py-2 rounded-pill">Account</a>
-      </div>
 
+<button class="btn btn-outline-dark rounded-pill btn-toggle-dark bg-dark mode" (click)="toggleDarkMode()">
+  <i class="bi" [ngClass]="isDarkMode ? 'bi-sun' : 'bi-moon'"></i>
+  <span>{{ isDarkMode ? ' Light' : ' Dark' }}</span>
+</button>
+    <!-- Wishlist -->
+    <div class="navbar-brand position-relative">
+      <a routerLink="/wishlist" style="text-decoration: none; color: inherit;">
+        <i class="bi bi-heart-fill me-2 fs-5"></i>
+        <span class="counter" *ngIf="counter != 0">{{ counter }}</span>
+        Wishlist
+      </a>
     </div>
-  </nav>
 
-</div>
-
+    <!-- Auth -->
+    <div class="navbar-brand" *ngIf="!isLoggedIn">
+      <a routerLink="/login" class="btn btn-dark px-4 py-2 rounded-pill">Login</a>
+    </div>
+    <div class="navbar-brand" *ngIf="isLoggedIn">
+      <button class="btn btn-danger px-4 py-2 rounded-pill" (click)="logout()">Logout</button>
+    </div>
+    <div class="navbar-brand" *ngIf="isLoggedIn">
+      <a routerLink="/account" class="btn btn-outline-dark px-4 py-2 rounded-pill">Account</a>
+    </div>
+  </div>
+  </div>
+</nav>
 
 
