@@ -1,6 +1,6 @@
 # 🎬 Movie-Application
 
-User can browse the movie app , able to see movies , see movie details, add movies to wishlist and the site support dark mode for more exciting (The site was built by Angular cli Framework version 20 and Bootstrap version 5) .
+User can browse the movie app , able to see movies , see movie details, add movies to wishlist and the site support dark mode for more exciting (The site was built by Framework Angular cli  version 20 and Bootstrap version 5) .
 
 # 🚀 Features
 ## 🔑 Authentication & Users
